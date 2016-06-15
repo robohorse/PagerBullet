@@ -51,7 +51,7 @@ dependencies {
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'gpversionchecker'
+    bintrayName = 'pagerbullet'
 
     publishedGroupId = 'com.robohorse.pagerbullet'
     libraryName = 'PagerBullet'
