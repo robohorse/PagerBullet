@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PagerBullet</string>
+    <string name="separator" formatted="false">%s gfh %s</string>
+</resources>

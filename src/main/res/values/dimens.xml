@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pager_bullet_indicator_height">52dp</dimen>
+</resources>

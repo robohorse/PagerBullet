@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pager_bullet_active">#836556</color>
+    <color name="pager_bullet_inactive">#219382</color>
+    <color name="pager_bullet_text_indicator">#ffffff</color>
+</resources>
