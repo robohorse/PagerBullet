@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -24,6 +25,7 @@ public class PagerBullet extends FrameLayout {
     private ViewPager viewPager;
     private TextView textIndicator;
     private LinearLayout layoutIndicator;
+    private View indicatorContainer;
 
     public PagerBullet(Context context) {
         super(context);
@@ -80,11 +82,19 @@ public class PagerBullet extends FrameLayout {
         setIndicatorItem(viewPager.getCurrentItem());
     }
 
+    public void setIndicatorPanelHeightInDp(int height) {
+        FrameLayout.LayoutParams params = (LayoutParams) indicatorContainer.getLayoutParams();
+        params.height = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height,
+                getResources().getDisplayMetrics()));
+        indicatorContainer.requestLayout();
+    }
+
     private void init(Context context) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View rootView = layoutInflater.inflate(R.layout.item_view_pager, this);
-        textIndicator = (TextView) rootView.findViewById(R.id.pagerBulletIndicatorText);
-        layoutIndicator = (LinearLayout) rootView.findViewById(R.id.pagerBulletIndicator);
+        indicatorContainer = rootView.findViewById(R.id.pagerBulletIndicatorContainer);
+        textIndicator = (TextView) indicatorContainer.findViewById(R.id.pagerBulletIndicatorText);
+        layoutIndicator = (LinearLayout) indicatorContainer.findViewById(R.id.pagerBulletIndicator);
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPagerBullet);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
