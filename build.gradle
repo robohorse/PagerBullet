@@ -19,8 +19,8 @@ android {
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 1000100
-        versionName "1.0.1"
+        versionCode 1000200
+        versionName "1.0.2"
     }
     buildTypes {
         release {
@@ -62,7 +62,7 @@ ext {
     siteUrl = 'https://github.com/robohorse/pagerbullet'
     gitUrl = 'https://github.com/robohorse/pagerbullet.git'
 
-    libraryVersion = '1.0.1'
+    libraryVersion = '1.0.2'
 
     developerId = 'robohorse'
     developerName = 'Vadim'
