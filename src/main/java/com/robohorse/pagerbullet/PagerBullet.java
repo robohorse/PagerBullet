@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -27,6 +28,9 @@ public class PagerBullet extends FrameLayout {
     private TextView textIndicator;
     private LinearLayout layoutIndicator;
     private View indicatorContainer;
+
+    private int activeColorTint;
+    private int inactiveColorTint;
 
     public PagerBullet(Context context) {
         super(context);
@@ -58,6 +62,12 @@ public class PagerBullet extends FrameLayout {
             indicatorContainer.requestLayout();
         }
         typedArray.recycle();
+    }
+
+    public void setIndicatorTintColorScheme(int activeColorTint, int inactiveColorTint) {
+        this.activeColorTint = activeColorTint;
+        this.inactiveColorTint = inactiveColorTint;
+        invalidateBullets();
     }
 
     public void setTextSeparatorOffset(int offset) {
@@ -167,10 +177,10 @@ public class PagerBullet extends FrameLayout {
     }
 
     private void setItemBullet(int selectedPosition) {
-        Drawable drawableInactive = ContextCompat.getDrawable(getContext(),
-                R.drawable.inactive_dot);
-        Drawable drawableActive = ContextCompat.getDrawable(getContext(),
-                R.drawable.active_dot);
+        Drawable drawableInactive = ContextCompat.getDrawable(getContext(), R.drawable.inactive_dot);
+        drawableInactive = wrapTintDrawable(drawableInactive, inactiveColorTint);
+        Drawable drawableActive = ContextCompat.getDrawable(getContext(), R.drawable.active_dot);
+        drawableActive = wrapTintDrawable(drawableActive, activeColorTint);
 
         final int indicatorItemsCount = layoutIndicator.getChildCount();
         for (int position = 0; position < indicatorItemsCount; position++) {
@@ -182,6 +192,18 @@ public class PagerBullet extends FrameLayout {
             } else {
                 imageView.setImageDrawable(drawableActive);
             }
+        }
+    }
+
+    public static Drawable wrapTintDrawable(Drawable sourceDrawable, int color) {
+        if (color != 0) {
+            Drawable wrapDrawable = DrawableCompat.wrap(sourceDrawable);
+            DrawableCompat.setTint(wrapDrawable, color);
+            wrapDrawable.setBounds(0, 0, wrapDrawable.getIntrinsicWidth(), wrapDrawable.getIntrinsicHeight());
+
+            return wrapDrawable;
+        } else {
+            return sourceDrawable;
         }
     }
 }
