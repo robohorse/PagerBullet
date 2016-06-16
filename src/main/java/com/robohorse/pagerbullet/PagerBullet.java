@@ -1,6 +1,7 @@
 package com.robohorse.pagerbullet;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -35,11 +36,28 @@ public class PagerBullet extends FrameLayout {
     public PagerBullet(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
+        setAttributes(context, attrs);
     }
 
     public PagerBullet(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
+        setAttributes(context, attrs);
+    }
+
+    private void setAttributes(Context context, AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PagerBullet);
+        String heightValue = typedArray.getString(R.styleable.PagerBullet_panelHeightInDp);
+
+        if (null != heightValue) {
+            heightValue = heightValue.replaceAll("[^0-9.]", "");
+            float height = Float.parseFloat(heightValue);
+            FrameLayout.LayoutParams params = (LayoutParams) indicatorContainer.getLayoutParams();
+            params.height = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height,
+                    getResources().getDisplayMetrics()));
+            indicatorContainer.requestLayout();
+        }
+        typedArray.recycle();
     }
 
     public void setTextSeparatorOffset(int offset) {
@@ -80,13 +98,6 @@ public class PagerBullet extends FrameLayout {
             initIndicator(adapter.getCount());
         }
         setIndicatorItem(viewPager.getCurrentItem());
-    }
-
-    public void setIndicatorPanelHeightInDp(int height) {
-        FrameLayout.LayoutParams params = (LayoutParams) indicatorContainer.getLayoutParams();
-        params.height = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height,
-                getResources().getDisplayMetrics()));
-        indicatorContainer.requestLayout();
     }
 
     private void init(Context context) {
