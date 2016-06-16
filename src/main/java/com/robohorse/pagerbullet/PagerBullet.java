@@ -1,6 +1,7 @@
 package com.robohorse.pagerbullet;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -16,12 +17,13 @@ import android.widget.TextView;
  * Created by vadim on 15.06.16.
  */
 public class PagerBullet extends FrameLayout {
+    private static final int DEFAULT_OFFSET_VALUE = 20;
+    private static final int DEFAULT_MARGIN_VALUE = 4;
+    private int offset = DEFAULT_OFFSET_VALUE;
+
     private ViewPager viewPager;
     private TextView textIndicator;
     private LinearLayout layoutIndicator;
-
-    private int separatorId;
-    private int offset = -1;
 
     public PagerBullet(Context context) {
         super(context);
@@ -38,34 +40,7 @@ public class PagerBullet extends FrameLayout {
         init(context);
     }
 
-    private void init(Context context) {
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View rootView = layoutInflater.inflate(R.layout.item_view_pager, null);
-        textIndicator = (TextView) rootView.findViewById(R.id.pagerBulletIndicatorText);
-        layoutIndicator = (LinearLayout) rootView.findViewById(R.id.pagerBulletIndicator);
-        viewPager = (ViewPager) rootView.findViewById(R.id.viewPagerBullet);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                setIndicatorItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        addView(rootView);
-    }
-
-    public void setTextSeparatorIdWithOffset(int separatorId, int offset) {
-        this.separatorId = separatorId;
+    public void setTextSeparatorOffset(int offset) {
         this.offset = offset;
     }
 
@@ -87,15 +62,47 @@ public class PagerBullet extends FrameLayout {
         viewPager.addOnPageChangeListener(onPageChangeListener);
     }
 
+    public void invalidateBullets() {
+        PagerAdapter adapter = viewPager.getAdapter();
+        if (null != adapter) {
+            invalidateBullets(adapter);
+        }
+    }
+
     public void invalidateBullets(PagerAdapter adapter) {
-        final boolean hasSeparator = separatorId != 0;
+        final boolean hasSeparator = hasSeparator();
         textIndicator.setVisibility(hasSeparator ? VISIBLE : INVISIBLE);
         layoutIndicator.setVisibility(hasSeparator ? INVISIBLE : VISIBLE);
 
-        if (!hasSeparator()) {
+        if (!hasSeparator) {
             initIndicator(adapter.getCount());
         }
         setIndicatorItem(viewPager.getCurrentItem());
+    }
+
+    private void init(Context context) {
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View rootView = layoutInflater.inflate(R.layout.item_view_pager, this);
+        textIndicator = (TextView) rootView.findViewById(R.id.pagerBulletIndicatorText);
+        layoutIndicator = (LinearLayout) rootView.findViewById(R.id.pagerBulletIndicator);
+        viewPager = (ViewPager) rootView.findViewById(R.id.viewPagerBullet);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setIndicatorItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void initIndicator(int count) {
@@ -105,13 +112,13 @@ public class PagerBullet extends FrameLayout {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
 
-        final int margin = 4;
-        params.setMargins(margin, 0, margin, 0);
+        params.setMargins(DEFAULT_MARGIN_VALUE, 0, DEFAULT_MARGIN_VALUE, 0);
+        Drawable drawableInactive = ContextCompat.getDrawable(getContext(),
+                R.drawable.inactive_dot);
 
         for (int i = 0; i < count; i++) {
             ImageView imageView = new ImageView(getContext());
-            imageView.setImageDrawable(ContextCompat.getDrawable(getContext(),
-                    R.drawable.inactive_dot));
+            imageView.setImageDrawable(drawableInactive);
             layoutIndicator.addView(imageView, params);
         }
     }
@@ -126,28 +133,33 @@ public class PagerBullet extends FrameLayout {
 
     private boolean hasSeparator() {
         PagerAdapter pagerAdapter = viewPager.getAdapter();
-        return separatorId != 0 && pagerAdapter.getCount() > offset;
+        return null != pagerAdapter && pagerAdapter.getCount() > offset;
     }
 
     private void setItemText(int index) {
         PagerAdapter adapter = viewPager.getAdapter();
         if (null != adapter) {
             final int count = adapter.getCount();
-            textIndicator.setText(String.format(getContext().getString(separatorId), index + 1, count));
+            textIndicator.setText(String.format(getContext()
+                    .getString(R.string.pager_bullet_separator), index + 1, count));
         }
     }
 
-    private void setItemBullet(int index) {
+    private void setItemBullet(int selectedPosition) {
+        Drawable drawableInactive = ContextCompat.getDrawable(getContext(),
+                R.drawable.inactive_dot);
+        Drawable drawableActive = ContextCompat.getDrawable(getContext(),
+                R.drawable.active_dot);
+
         final int indicatorItemsCount = layoutIndicator.getChildCount();
-        for (int i = 0; i < indicatorItemsCount; i++) {
-            ImageView imageView = (ImageView) layoutIndicator.getChildAt(i);
-            if (i != index) {
-                imageView.setImageDrawable(ContextCompat.getDrawable(getContext(),
-                        R.drawable.inactive_dot));
+        for (int position = 0; position < indicatorItemsCount; position++) {
+            ImageView imageView = (ImageView) layoutIndicator.getChildAt(position);
+
+            if (position != selectedPosition) {
+                imageView.setImageDrawable(drawableInactive);
 
             } else {
-                imageView.setImageDrawable(ContextCompat.getDrawable(getContext(),
-                        R.drawable.active_dot));
+                imageView.setImageDrawable(drawableActive);
             }
         }
     }
