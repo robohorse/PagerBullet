@@ -51,7 +51,7 @@ public class PagerBullet extends FrameLayout {
 
     public void setCurrentItem(int position) {
         viewPager.setCurrentItem(position);
-        setCurrentItem(position);
+        setIndicatorItem(position);
     }
 
     public ViewPager getViewPager() {
