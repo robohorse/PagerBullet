@@ -21,7 +21,6 @@ import android.widget.TextView;
  */
 public class PagerBullet extends FrameLayout {
     private static final int DEFAULT_OFFSET_VALUE = 20;
-    private static final int DEFAULT_MARGIN_VALUE = 4;
     private int offset = DEFAULT_OFFSET_VALUE;
 
     private ViewPager viewPager;
@@ -143,7 +142,10 @@ public class PagerBullet extends FrameLayout {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
 
-        params.setMargins(DEFAULT_MARGIN_VALUE, 0, DEFAULT_MARGIN_VALUE, 0);
+        int margin = Math.round(getContext().getResources()
+                .getDimension(R.dimen.pager_bullet_indicator_dot_margin));
+
+        params.setMargins(margin, 0, margin, 0);
         Drawable drawableInactive = ContextCompat.getDrawable(getContext(),
                 R.drawable.inactive_dot);
 

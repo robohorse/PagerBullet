@@ -5,8 +5,8 @@
     android:useLevel="true">
 
     <size
-        android:width="8dp"
-        android:height="8dp" />
+        android:width="@dimen/pager_bullet_indicator_inactive_dot_radius"
+        android:height="@dimen/pager_bullet_indicator_inactive_dot_radius" />
 
     <solid android:color="@color/pager_bullet_inactive" />
 </shape>

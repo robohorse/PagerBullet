@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="pager_bullet_indicator_height">52dp</dimen>
+    <dimen name="pager_bullet_indicator_dot_margin">4dp</dimen>
+    <dimen name="pager_bullet_indicator_active_dot_radius">12dp</dimen>
+    <dimen name="pager_bullet_indicator_inactive_dot_radius">8dp</dimen>
 </resources>
