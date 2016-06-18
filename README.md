@@ -1,5 +1,5 @@
 # PagerBullet
-Simple Bullet-Indication ViewPager Wrapper
+Android ViewPager with bottom dots
 
 <p>
 <img src="images/sample.png" height="500">
