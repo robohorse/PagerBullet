@@ -25,7 +25,8 @@ pagerAdapter.notifyDataSetChanged();
 
 #Customization
 <b>Text indicator</b>
-This library can show donts or text indicator, when ViewPager contains a lot of pages.
+
+This library can show dots or text indicator, when ViewPager contains a lot of pages.
 You can set limit of pages, when you want to show text indicator (default value is 20).
 
 Just add
@@ -37,7 +38,7 @@ and you will see text instead of dots, when pages more than 5:
 <img src="images/text_indicator.png" height="500">
 </p>
 
-You can castomize this text by override
+You can customize this text by override
 ```xml
     <string name="pager_bullet_separator" formatted="false">%s / %s</string>
 ```
