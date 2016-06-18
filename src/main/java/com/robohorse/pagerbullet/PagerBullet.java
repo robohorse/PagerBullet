@@ -20,8 +20,9 @@ import android.widget.TextView;
  * Created by vadim on 15.06.16.
  */
 public class PagerBullet extends FrameLayout {
-    private static final int DEFAULT_OFFSET_VALUE = 20;
-    private int offset = DEFAULT_OFFSET_VALUE;
+    private static final String DIGIT_PATTERN = "[^0-9.]";
+    private static final int DEFAULT_INDICATOR_OFFSET_VALUE = 20;
+    private int offset = DEFAULT_INDICATOR_OFFSET_VALUE;
 
     private ViewPager viewPager;
     private TextView textIndicator;
@@ -53,7 +54,7 @@ public class PagerBullet extends FrameLayout {
         String heightValue = typedArray.getString(R.styleable.PagerBullet_panelHeightInDp);
 
         if (null != heightValue) {
-            heightValue = heightValue.replaceAll("[^0-9.]", "");
+            heightValue = heightValue.replaceAll(DIGIT_PATTERN, "");
             float height = Float.parseFloat(heightValue);
             FrameLayout.LayoutParams params = (LayoutParams) indicatorContainer.getLayoutParams();
             params.height = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height,
@@ -115,6 +116,7 @@ public class PagerBullet extends FrameLayout {
         indicatorContainer = rootView.findViewById(R.id.pagerBulletIndicatorContainer);
         textIndicator = (TextView) indicatorContainer.findViewById(R.id.pagerBulletIndicatorText);
         layoutIndicator = (LinearLayout) indicatorContainer.findViewById(R.id.pagerBulletIndicator);
+
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPagerBullet);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -185,6 +187,7 @@ public class PagerBullet extends FrameLayout {
         drawableActive = wrapTintDrawable(drawableActive, activeColorTint);
 
         final int indicatorItemsCount = layoutIndicator.getChildCount();
+
         for (int position = 0; position < indicatorItemsCount; position++) {
             ImageView imageView = (ImageView) layoutIndicator.getChildAt(position);
 
@@ -201,9 +204,10 @@ public class PagerBullet extends FrameLayout {
         if (color != 0) {
             Drawable wrapDrawable = DrawableCompat.wrap(sourceDrawable);
             DrawableCompat.setTint(wrapDrawable, color);
-            wrapDrawable.setBounds(0, 0, wrapDrawable.getIntrinsicWidth(), wrapDrawable.getIntrinsicHeight());
-
+            wrapDrawable.setBounds(0, 0, wrapDrawable.getIntrinsicWidth(),
+                    wrapDrawable.getIntrinsicHeight());
             return wrapDrawable;
+
         } else {
             return sourceDrawable;
         }
