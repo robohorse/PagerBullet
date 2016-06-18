@@ -46,5 +46,35 @@ pagerBullet.setIndicatorTintColorScheme(Color.WHITE, Color.BLUE);
     <dimen name="pager_bullet_indicator_dot_margin">4dp</dimen>
 ```
 
+<b>Dot container height:</b>
+<p>
+<img src="images/container.png" height="500">
+</p>
+
+```xml
+   <dimen name="pager_bullet_indicator_height">52dp</dimen>
+```
+
+or
+```xml
+   app:panelHeightInDp="52dp"
+```
+like this:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.robohorse.pagerbullet.PagerBullet
+        android:id="@+id/pagerBullet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:panelHeightInDp="52dp" />
+    
+</FrameLayout>
+```
+
 #About
 Copyright 2016 Vadim Shchenev, and licensed under the MIT license. No attribution is necessary but it's very much appreciated. Star this project if you like it.
