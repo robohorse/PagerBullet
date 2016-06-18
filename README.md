@@ -1,6 +1,10 @@
 # PagerBullet
 Simple Bullet-Indication ViewPager Wrapper
 
+<p>
+<img src="images/sample.png" height="500">
+</p>
+
 #Quick start
 
 1) Just add this dependency into your build.gradle
