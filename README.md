@@ -1,5 +1,7 @@
 # PagerBullet
-Android ViewPager with bottom dots
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PagerBullet-green.svg?style=true)](https://android-arsenal.com/details/1/3749)
+
+<p>Android ViewPager with bottom dots</p>
 
 <p>
 <img src="images/sample.png" height="500">
