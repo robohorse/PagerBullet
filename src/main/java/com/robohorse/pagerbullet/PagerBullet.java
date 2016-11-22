@@ -3,7 +3,6 @@ package com.robohorse.pagerbullet;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.IntDef;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.PagerAdapter;
@@ -16,9 +15,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by vadim on 15.06.16.
@@ -51,6 +47,20 @@ public class PagerBullet extends FrameLayout {
         super(context, attrs, defStyleAttr);
         init(context);
         setAttributes(context, attrs);
+    }
+
+    public static Drawable wrapTintDrawable(Drawable sourceDrawable, int color) {
+        if (color != 0) {
+            Drawable wrapDrawable = DrawableCompat.wrap(sourceDrawable);
+            DrawableCompat.setTint(wrapDrawable, color);
+            wrapDrawable.setBounds(0, 0, wrapDrawable.getIntrinsicWidth(),
+                    wrapDrawable.getIntrinsicHeight());
+            return wrapDrawable;
+
+        }
+        else {
+            return sourceDrawable;
+        }
     }
 
     private void setAttributes(Context context, AttributeSet attrs) {
@@ -153,7 +163,7 @@ public class PagerBullet extends FrameLayout {
         );
 
         int margin = Math.round(getContext().getResources()
-                .getDimension(R.dimen.pager_bullet_indicator_dot_margin));
+                                            .getDimension(R.dimen.pager_bullet_indicator_dot_margin));
 
         params.setMargins(margin, 0, margin, 0);
         Drawable drawableInactive = ContextCompat.getDrawable(getContext(),
@@ -169,7 +179,8 @@ public class PagerBullet extends FrameLayout {
     private void setIndicatorItem(int index) {
         if (!hasSeparator()) {
             setItemBullet(index);
-        } else {
+        }
+        else {
             setItemText(index);
         }
     }
@@ -202,22 +213,10 @@ public class PagerBullet extends FrameLayout {
             if (position != selectedPosition) {
                 imageView.setImageDrawable(drawableInactive);
 
-            } else {
+            }
+            else {
                 imageView.setImageDrawable(drawableActive);
             }
-        }
-    }
-
-    public static Drawable wrapTintDrawable(Drawable sourceDrawable, int color) {
-        if (color != 0) {
-            Drawable wrapDrawable = DrawableCompat.wrap(sourceDrawable);
-            DrawableCompat.setTint(wrapDrawable, color);
-            wrapDrawable.setBounds(0, 0, wrapDrawable.getIntrinsicWidth(),
-                    wrapDrawable.getIntrinsicHeight());
-            return wrapDrawable;
-
-        } else {
-            return sourceDrawable;
         }
     }
 }
