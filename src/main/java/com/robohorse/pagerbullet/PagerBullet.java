@@ -3,6 +3,7 @@ package com.robohorse.pagerbullet;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.IntDef;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.PagerAdapter;
@@ -15,6 +16,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by vadim on 15.06.16.
@@ -108,6 +112,10 @@ public class PagerBullet extends FrameLayout {
             initIndicator(adapter.getCount());
         }
         setIndicatorItem(viewPager.getCurrentItem());
+    }
+
+    public void setIndicatorVisibility(boolean visibility) {
+        indicatorContainer.setVisibility(visibility ? VISIBLE : INVISIBLE);
     }
 
     private void init(Context context) {
