@@ -57,8 +57,7 @@ public class PagerBullet extends FrameLayout {
                     wrapDrawable.getIntrinsicHeight());
             return wrapDrawable;
 
-        }
-        else {
+        } else {
             return sourceDrawable;
         }
     }
@@ -163,7 +162,7 @@ public class PagerBullet extends FrameLayout {
         );
 
         int margin = Math.round(getContext().getResources()
-                                            .getDimension(R.dimen.pager_bullet_indicator_dot_margin));
+                .getDimension(R.dimen.pager_bullet_indicator_dot_margin));
 
         params.setMargins(margin, 0, margin, 0);
         Drawable drawableInactive = ContextCompat.getDrawable(getContext(),
@@ -179,8 +178,7 @@ public class PagerBullet extends FrameLayout {
     private void setIndicatorItem(int index) {
         if (!hasSeparator()) {
             setItemBullet(index);
-        }
-        else {
+        } else {
             setItemText(index);
         }
     }
@@ -213,8 +211,7 @@ public class PagerBullet extends FrameLayout {
             if (position != selectedPosition) {
                 imageView.setImageDrawable(drawableInactive);
 
-            }
-            else {
+            } else {
                 imageView.setImageDrawable(drawableActive);
             }
         }
