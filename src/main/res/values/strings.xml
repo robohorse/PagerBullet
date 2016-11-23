@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">PagerBullet</string>
-    <string name="pager_bullet_separator" formatted="false">%d / %d</string>
+    <string name="pager_bullet_separator" formatted="false">%s / %s</string>
 </resources>

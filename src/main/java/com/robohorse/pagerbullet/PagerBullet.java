@@ -192,8 +192,11 @@ public class PagerBullet extends FrameLayout {
         PagerAdapter adapter = viewPager.getAdapter();
         if (null != adapter) {
             final int count = adapter.getCount();
-            textIndicator.setText(String.format(getContext()
-                    .getString(R.string.pager_bullet_separator), index + 1, count));
+            textIndicator.setText(
+                    String.format(getContext().getString(R.string.pager_bullet_separator),
+                            String.valueOf(index + 1),
+                            String.valueOf(count))
+            );
         }
     }
 
