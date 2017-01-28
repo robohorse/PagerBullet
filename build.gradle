@@ -31,8 +31,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.0.100-beta'
+    testCompile 'org.robolectric:robolectric:3.1.2'
+    testCompile 'org.robolectric:shadows-multidex:3.0'
+    
     compile 'com.android.support:appcompat-v7:25.1.0'
 }
 
@@ -42,11 +45,6 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
-}
-
-dependencies {
-    testCompile 'junit:junit:4.12'
-    compile 'org.jsoup:jsoup:1.7.2'
 }
 
 ext {
