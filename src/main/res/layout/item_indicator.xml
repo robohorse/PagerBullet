@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pagerBulletIndicatorContainer"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/pager_bullet_indicator_height"
+    android:layout_gravity="bottom">
+
+    <LinearLayout
+        android:id="@+id/pagerBulletIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/pagerBulletIndicatorText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@color/pager_bullet_text_indicator"
+        android:visibility="invisible" />
+</FrameLayout>

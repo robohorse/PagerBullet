@@ -51,10 +51,13 @@ public class PagerBullet extends FrameLayout {
 
     public static Drawable wrapTintDrawable(Drawable sourceDrawable, int color) {
         if (color != 0) {
-            Drawable wrapDrawable = DrawableCompat.wrap(sourceDrawable);
+            final Drawable wrapDrawable = DrawableCompat.wrap(sourceDrawable);
             DrawableCompat.setTint(wrapDrawable, color);
-            wrapDrawable.setBounds(0, 0, wrapDrawable.getIntrinsicWidth(),
-                    wrapDrawable.getIntrinsicHeight());
+            wrapDrawable.setBounds(
+                    0, 0,
+                    wrapDrawable.getIntrinsicWidth(),
+                    wrapDrawable.getIntrinsicHeight()
+            );
             return wrapDrawable;
 
         } else {
@@ -63,15 +66,20 @@ public class PagerBullet extends FrameLayout {
     }
 
     private void setAttributes(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PagerBullet);
+        final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PagerBullet);
         String heightValue = typedArray.getString(R.styleable.PagerBullet_panelHeightInDp);
 
         if (null != heightValue) {
             heightValue = heightValue.replaceAll(DIGIT_PATTERN, "");
             float height = Float.parseFloat(heightValue);
-            FrameLayout.LayoutParams params = (LayoutParams) indicatorContainer.getLayoutParams();
-            params.height = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height,
-                    getResources().getDisplayMetrics()));
+            final FrameLayout.LayoutParams params = (LayoutParams) indicatorContainer.getLayoutParams();
+            params.height = Math.round(
+                    TypedValue.applyDimension(
+                            TypedValue.COMPLEX_UNIT_DIP,
+                            height,
+                            getResources().getDisplayMetrics()
+                    )
+            );
             indicatorContainer.requestLayout();
         }
         typedArray.recycle();
@@ -106,7 +114,7 @@ public class PagerBullet extends FrameLayout {
     }
 
     public void invalidateBullets() {
-        PagerAdapter adapter = viewPager.getAdapter();
+        final PagerAdapter adapter = viewPager.getAdapter();
         if (null != adapter) {
             invalidateBullets(adapter);
         }
@@ -128,8 +136,9 @@ public class PagerBullet extends FrameLayout {
     }
 
     private void init(Context context) {
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View rootView = layoutInflater.inflate(R.layout.item_view_pager, this);
+        final LayoutInflater layoutInflater = LayoutInflater.from(context);
+        final View rootView = layoutInflater.inflate(R.layout.item_view_pager, this);
+
         indicatorContainer = rootView.findViewById(R.id.pagerBulletIndicatorContainer);
         textIndicator = (TextView) indicatorContainer.findViewById(R.id.pagerBulletIndicatorText);
         layoutIndicator = (LinearLayout) indicatorContainer.findViewById(R.id.pagerBulletIndicator);
@@ -156,20 +165,22 @@ public class PagerBullet extends FrameLayout {
 
     private void initIndicator(int count) {
         layoutIndicator.removeAllViews();
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
 
-        int margin = Math.round(getContext().getResources()
+        final int margin = Math.round(getContext().getResources()
                 .getDimension(R.dimen.pager_bullet_indicator_dot_margin));
 
         params.setMargins(margin, 0, margin, 0);
-        Drawable drawableInactive = ContextCompat.getDrawable(getContext(),
-                R.drawable.inactive_dot);
+        final Drawable drawableInactive = ContextCompat.getDrawable(
+                getContext(),
+                R.drawable.inactive_dot
+        );
 
         for (int i = 0; i < count; i++) {
-            ImageView imageView = new ImageView(getContext());
+            final ImageView imageView = new ImageView(getContext());
             imageView.setImageDrawable(drawableInactive);
             layoutIndicator.addView(imageView, params);
         }
@@ -184,18 +195,19 @@ public class PagerBullet extends FrameLayout {
     }
 
     private boolean hasSeparator() {
-        PagerAdapter pagerAdapter = viewPager.getAdapter();
+        final PagerAdapter pagerAdapter = viewPager.getAdapter();
         return null != pagerAdapter && pagerAdapter.getCount() > offset;
     }
 
     private void setItemText(int index) {
-        PagerAdapter adapter = viewPager.getAdapter();
+        final PagerAdapter adapter = viewPager.getAdapter();
         if (null != adapter) {
             final int count = adapter.getCount();
             textIndicator.setText(
                     String.format(getContext().getString(R.string.pager_bullet_separator),
                             String.valueOf(index + 1),
-                            String.valueOf(count))
+                            String.valueOf(count)
+                    )
             );
         }
     }
@@ -209,7 +221,7 @@ public class PagerBullet extends FrameLayout {
         final int indicatorItemsCount = layoutIndicator.getChildCount();
 
         for (int position = 0; position < indicatorItemsCount; position++) {
-            ImageView imageView = (ImageView) layoutIndicator.getChildAt(position);
+            final ImageView imageView = (ImageView) layoutIndicator.getChildAt(position);
 
             if (position != selectedPosition) {
                 imageView.setImageDrawable(drawableInactive);
