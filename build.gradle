@@ -35,7 +35,7 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.0.100-beta'
     testCompile 'org.robolectric:robolectric:3.1.2'
     testCompile 'org.robolectric:shadows-multidex:3.0'
-    
+
     compile 'com.android.support:appcompat-v7:25.1.0'
 }
 
