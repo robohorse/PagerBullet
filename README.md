@@ -7,7 +7,7 @@
 <img src="images/sample.png" height="500">
 </p>
 
-#Quick start
+# Quick start
 
 1) Just add this dependency into your build.gradle
 ```gradle
@@ -25,7 +25,7 @@ pagerAdapter.notifyDataSetChanged();
 ```
 4) Profit!
 
-#Customization
+# Customization
 <b>Text indicator</b>
 
 This library can show dots or text indicator, when ViewPager contains a lot of pages.
@@ -100,5 +100,5 @@ like this:
 </FrameLayout>
 ```
 
-#About
+# About
 Copyright 2016 Vadim Shchenev, and licensed under the MIT license. No attribution is necessary but it's very much appreciated. Star this project if you like it.
