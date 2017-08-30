@@ -9,9 +9,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by vadim on 28.01.17.
@@ -34,10 +38,10 @@ public class PagerBulletTest {
 
     @Test
     public void testInitialization() {
-        Assert.assertNotNull(pagerBullet);
-        Assert.assertNotNull(dotsLayout);
-        Assert.assertNotNull(textIndicator);
-        Assert.assertTrue(pagerBullet.getVisibility() == View.VISIBLE);
+        assertNotNull(pagerBullet);
+        assertNotNull(dotsLayout);
+        assertNotNull(textIndicator);
+        assertEquals(View.VISIBLE, pagerBullet.getVisibility());
     }
 
     @Test
@@ -47,9 +51,9 @@ public class PagerBulletTest {
         pagerBullet.setTextSeparatorOffset(dotsLimit);
         pagerBullet.setAdapter(new TestPagerAdapter(activity, dotsCount));
 
-        Assert.assertTrue(dotsLayout.getVisibility() == View.VISIBLE);
-        Assert.assertTrue(dotsLayout.getChildCount() == dotsCount);
-        Assert.assertTrue(textIndicator.getVisibility() == View.INVISIBLE);
+        assertEquals(View.VISIBLE, dotsLayout.getVisibility());
+        assertEquals(dotsCount, dotsLayout.getChildCount());
+        assertEquals(View.INVISIBLE, textIndicator.getVisibility());
     }
 
     @Test
@@ -59,7 +63,41 @@ public class PagerBulletTest {
         pagerBullet.setTextSeparatorOffset(dotsLimit);
         pagerBullet.setAdapter(new TestPagerAdapter(activity, dotsCount));
 
-        Assert.assertTrue(dotsLayout.getVisibility() == View.INVISIBLE);
-        Assert.assertTrue(textIndicator.getVisibility() == View.VISIBLE);
+        assertEquals(View.INVISIBLE, dotsLayout.getVisibility());
+        assertEquals(View.VISIBLE, textIndicator.getVisibility());
+    }
+
+    @Test
+    public void testGetCurrentItem() {
+        pagerBullet.setAdapter(new TestPagerAdapter(activity, 10));
+
+        assertEquals(0, pagerBullet.getCurrentItem());
+    }
+
+    @Test
+    public void testSetCurrentItemNoAnimation() {
+        pagerBullet.setAdapter(new TestPagerAdapter(activity, 10));
+        pagerBullet.setCurrentItem(2, false);
+
+        assertEquals(2, pagerBullet.getCurrentItem());
+    }
+
+    @Test
+    public void testSetCurrentItemExplicitAnimation() {
+        pagerBullet.setAdapter(new TestPagerAdapter(activity, 10));
+        pagerBullet.setCurrentItem(2, true);
+
+        assertEquals(2, pagerBullet.getCurrentItem());
+    }
+
+    @Test
+    public void testSetCurrentItem() {
+        PagerBullet spy = Mockito.spy(pagerBullet);
+
+        spy.setAdapter(new TestPagerAdapter(activity, 10));
+        spy.setCurrentItem(2);
+
+        assertEquals(2, spy.getCurrentItem());
+        Mockito.verify(spy, Mockito.times(1)).setCurrentItem(2, true);
     }
 }
