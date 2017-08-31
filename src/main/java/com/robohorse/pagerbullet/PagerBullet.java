@@ -101,8 +101,16 @@ public class PagerBullet extends FrameLayout {
     }
 
     public void setCurrentItem(int position) {
-        viewPager.setCurrentItem(position);
+        setCurrentItem(position, true);
+    }
+
+    public void setCurrentItem(int position, boolean smoothScroll) {
+        viewPager.setCurrentItem(position, smoothScroll);
         setIndicatorItem(position);
+    }
+
+    public int getCurrentItem() {
+        return viewPager.getCurrentItem();
     }
 
     public ViewPager getViewPager() {

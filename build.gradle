@@ -3,11 +3,18 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.3'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
     }
 }
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.android.library'
 
@@ -31,12 +38,13 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-compat:25.3.1'
+
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.0.100-beta'
     testCompile 'org.robolectric:robolectric:3.1.2'
     testCompile 'org.robolectric:shadows-multidex:3.0'
-
-    compile 'com.android.support:appcompat-v7:25.1.0'
 }
 
 Properties properties = new Properties()
