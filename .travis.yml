@@ -1,0 +1,14 @@
+language: android
+android:
+  components:
+     - tools
+     - platform-tools
+     - android-26
+     - build-tools-26.0.1
+
+branches:
+  only:
+    - master
+
+after_success:
+- ./gradlew jacoco coveralls --stacktrace
