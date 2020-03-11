@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.ximpleware:vtd-xml:2.11@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ximpleware/vtd-xml/2.11/ee5bcf62c1acf76434ee9f1c67a840bafef72a6d/vtd-xml-2.11.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ximpleware/vtd-xml/2.11/18a5f2a50ab41af03763fd215d14e620b12c7055/vtd-xml-2.11-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ximpleware/vtd-xml/2.11/fa2dcbbe7f3bf99312efc0a010d8aa97f0f5779e/vtd-xml-2.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
