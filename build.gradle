@@ -1,9 +1,10 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.5.2'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
     }
@@ -12,6 +13,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 }
 
@@ -20,14 +22,14 @@ apply plugin: 'com.android.library'
 
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 28
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 25
-        versionCode 1000900
-        versionName "1.0.9"
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionCode 1000901
+        versionName "1.1.0"
     }
     buildTypes {
         release {
@@ -38,13 +40,13 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:support-compat:25.3.1'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core:1.2.0'
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.0.100-beta'
-    testCompile 'org.robolectric:robolectric:3.1.2'
-    testCompile 'org.robolectric:shadows-multidex:3.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.0.100-beta'
+    testImplementation 'org.robolectric:robolectric:3.1.2'
+    testImplementation 'org.robolectric:shadows-multidex:3.0'
 }
 
 Properties properties = new Properties()
@@ -68,7 +70,7 @@ ext {
     siteUrl = 'https://github.com/robohorse/pagerbullet'
     gitUrl = 'https://github.com/robohorse/pagerbullet.git'
 
-    libraryVersion = '1.0.9'
+    libraryVersion = '1.1.0'
 
     developerId = 'robohorse'
     developerName = 'Vadim'
