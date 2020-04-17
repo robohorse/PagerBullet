@@ -13,9 +13,12 @@
 ```gradle
 compile 'com.robohorse.pagerbullet:pagerbullet:1.1.0'
 ```
+```gradle
 androidX: 1.1.+
+```
+```gradle
 android.support: < 1.1.0
-
+```
 2) Replace your default ViewPager by com.robohorse.pagerbullet.PagerBullet
 
 3) Call this
