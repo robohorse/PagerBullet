@@ -3,10 +3,6 @@ package com.robohorse.pagerbullet;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -15,6 +11,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by vadim on 15.06.16.
@@ -148,10 +149,10 @@ public class PagerBullet extends FrameLayout {
         final View rootView = layoutInflater.inflate(R.layout.item_view_pager, this);
 
         indicatorContainer = rootView.findViewById(R.id.pagerBulletIndicatorContainer);
-        textIndicator = (TextView) indicatorContainer.findViewById(R.id.pagerBulletIndicatorText);
-        layoutIndicator = (LinearLayout) indicatorContainer.findViewById(R.id.pagerBulletIndicator);
+        textIndicator = indicatorContainer.findViewById(R.id.pagerBulletIndicatorText);
+        layoutIndicator = indicatorContainer.findViewById(R.id.pagerBulletIndicator);
 
-        viewPager = (ViewPager) rootView.findViewById(R.id.viewPagerBullet);
+        viewPager = rootView.findViewById(R.id.viewPagerBullet);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
