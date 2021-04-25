@@ -22,13 +22,7 @@ and:
 ```gradle
  implementation 'com.github.robohorse:PagerBullet:Tag'
 ```
-Note:
-```
-androidX: 1.2.+
-```
-```
-android.support: < 1.1.0
-```
+
 2) Replace your default ViewPager by com.robohorse.pagerbullet.PagerBullet
 
 3) Call this
