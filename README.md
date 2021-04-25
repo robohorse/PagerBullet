@@ -1,5 +1,6 @@
 # PagerBullet
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PagerBullet-green.svg?style=true)](https://android-arsenal.com/details/1/3749)
+[![](https://jitpack.io/v/robohorse/PagerBullet.svg)](https://jitpack.io/#robohorse/PagerBullet)
 
 <p>Android ViewPager with bottom dots</p>
 
@@ -10,12 +11,20 @@
 # Quick start
 
 1) Just add this dependency into your build.gradle
+
 ```gradle
-compile 'com.robohorse.pagerbullet:pagerbullet:1.1.0'
+ repositories {
+     mavenCentral()
+     maven { url "https://jitpack.io" }
+ }
+```
+and:
+```gradle
+ implementation 'com.github.robohorse:PagerBullet:Tag'
 ```
 Note:
 ```
-androidX: 1.1.+
+androidX: 1.2.+
 ```
 ```
 android.support: < 1.1.0
