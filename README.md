@@ -1,3 +1,6 @@
+# Deprecated
+Please use the Jetpack Compose instead https://developer.android.com/compose
+
 # PagerBullet
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PagerBullet-green.svg?style=true)](https://android-arsenal.com/details/1/3749)
 [![](https://jitpack.io/v/robohorse/PagerBullet.svg)](https://jitpack.io/#robohorse/PagerBullet)
